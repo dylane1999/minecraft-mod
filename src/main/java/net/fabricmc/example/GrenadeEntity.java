@@ -46,11 +46,11 @@ public class GrenadeEntity extends ThrownItemEntity {
     }
 
     public GrenadeEntity(World world, LivingEntity owner) {
-        super((EntityType<? extends ThrownItemEntity>)EntityType.SNOWBALL, owner, world);
+        super((EntityType<? extends ThrownItemEntity>)ExampleMod.GRENADE_ENTITY_TYPE, owner, world);
     }
 
     public GrenadeEntity(World world, double x, double y, double z) {
-        super((EntityType<? extends ThrownItemEntity>)EntityType.SNOWBALL, x, y, z, world);
+        super((EntityType<? extends ThrownItemEntity>)ExampleMod.GRENADE_ENTITY_TYPE, x, y, z, world);
     }
 
 
@@ -96,4 +96,11 @@ public class GrenadeEntity extends ThrownItemEntity {
         float power = 4.0f;
         this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), power, Explosion.DestructionType.BREAK);
     }
+
+    // @Override
+	// public Packet createSpawnPacket() {
+	// 	return EntitySpawnPacket.create(this, ExampleMod.PacketID);
+	// }
+
+
 }
