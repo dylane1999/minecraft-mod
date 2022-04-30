@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -67,10 +66,10 @@ public class NukeBlock extends Block {
             if (world.isClient) {
                 return;
             }
-            TntEntity tntEntity = new TntEntity(world, (double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, explosion.getCausingEntity());
-            int i = tntEntity.getFuse();
-            tntEntity.setFuse((short)(world.random.nextInt(i / 4) + i / 8));
-            world.spawnEntity(tntEntity);
+            NukeEntity nukeEntity = new NukeEntity(world, (double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, explosion.getCausingEntity());
+            int i = nukeEntity.getFuse();
+            nukeEntity.setFuse((short)(world.random.nextInt(i / 4) + i / 8));
+            world.spawnEntity(nukeEntity);
         }
     
         public static void primeTnt(World world, BlockPos pos) {
@@ -81,9 +80,9 @@ public class NukeBlock extends Block {
             if (world.isClient) {
                 return;
             }
-            TntEntity tntEntity = new TntEntity(world, (double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, igniter);
-            world.spawnEntity(tntEntity);
-            world.playSound(null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0f, 1.0f);
+            NukeEntity nukeEntity = new NukeEntity(world, (double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, igniter);
+            world.spawnEntity(nukeEntity);
+            world.playSound(null, nukeEntity.getX(), nukeEntity.getY(), nukeEntity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent((Entity)igniter, GameEvent.PRIME_FUSE, pos);
         }
     

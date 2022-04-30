@@ -82,8 +82,8 @@ public class NukeEntity extends Entity {
         }
     
         private void explode() {
-            float f = 4.0f;
-            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 4.0f, Explosion.DestructionType.BREAK);
+            float power = 175.0f;
+            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), power, Explosion.DestructionType.BREAK);
         }
     
         @Override

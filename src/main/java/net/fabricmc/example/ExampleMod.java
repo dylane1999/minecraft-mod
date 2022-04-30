@@ -5,6 +5,7 @@ import net.fabricmc.example.grenade.GrenadeEntity;
 import net.fabricmc.example.grenade.GrenadeItem;
 import net.fabricmc.example.nuke.NukeBlock;
 import net.fabricmc.example.nuke.NukeEntity;
+import net.fabricmc.example.nuke.NukeRenderer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -15,6 +16,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -71,15 +73,14 @@ public class ExampleMod implements ModInitializer {
 	public static final NukeBlock NUKE_BLOCK = new NukeBlock(FabricBlockSettings.of(Material.STONE).hardness(4.0f));
 
 	public static final EntityType<NukeEntity> NUKE_ENTITY_TYPE = Registry.register(
-		Registry.ENTITY_TYPE,
-		new Identifier("nuke", "nuke_block"),
-		FabricEntityTypeBuilder.<NukeEntity>create(SpawnGroup.MISC, NukeEntity::new)
-				.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
-				.trackRangeBlocks(4).trackedUpdateRate(10) // necessary for all thrown projectiles (as it prevents
-															// it from breaking, lol)
-				.build() // VERY IMPORTANT DONT DELETE FOR THE LOVE OF GOD PSLSSSSSS
-);
-
+			Registry.ENTITY_TYPE,
+			new Identifier("nuke", "nuke_block"),
+			FabricEntityTypeBuilder.<NukeEntity>create(SpawnGroup.MISC, NukeEntity::new)
+					.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
+					.trackRangeBlocks(4).trackedUpdateRate(10) // necessary for all thrown projectiles (as it prevents
+																// it from breaking, lol)
+					.build() // VERY IMPORTANT DONT DELETE FOR THE LOVE OF GOD PSLSSSSSS
+	);
 
 	@Override
 	public void onInitialize() {
@@ -90,15 +91,16 @@ public class ExampleMod implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		Registry.register(Registry.ITEM, new Identifier("grenade", "grenade_item"), GRENADE_ITEM);
 		Registry.register(Registry.BLOCK, new Identifier("nuke", "nuke_block"), NUKE_BLOCK);
-		Registry.register(Registry.ITEM, new Identifier("nuke", "nuke_block"), new BlockItem(NUKE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
+		Registry.register(Registry.ITEM, new Identifier("nuke", "nuke_block"),
+				new BlockItem(NUKE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
 		EntityRendererRegistry.register(GRENADE_ENTITY_TYPE, (context) -> new FlyingItemEntityRenderer(context));
-		EntityRendererRegistry.register(NUKE_ENTITY_TYPE, (context) -> new FlyingItemEntityRenderer(context));
 
+		EntityRendererRegistry.register(NUKE_ENTITY_TYPE, (context) -> {
+			return new NukeRenderer(context);
+		});
 
 		// receiveEntityPacket();
 
 	}
-
-
 
 }
