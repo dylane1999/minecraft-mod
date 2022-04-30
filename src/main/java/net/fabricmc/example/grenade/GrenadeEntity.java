@@ -1,5 +1,6 @@
-package net.fabricmc.example;
+package net.fabricmc.example.grenade;
 
+import net.fabricmc.example.ExampleMod;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;

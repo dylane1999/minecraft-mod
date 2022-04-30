@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package net.fabricmc.example.grenade;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
