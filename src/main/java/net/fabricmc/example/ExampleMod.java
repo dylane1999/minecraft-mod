@@ -3,6 +3,7 @@ package net.fabricmc.example;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.example.grenade.GrenadeEntity;
 import net.fabricmc.example.grenade.GrenadeItem;
+import net.fabricmc.example.lightsaber.LightsaberItem;
 import net.fabricmc.example.nuke.NukeBlock;
 import net.fabricmc.example.nuke.NukeEntity;
 import net.fabricmc.example.nuke.NukeRenderer;
@@ -29,6 +30,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
+import net.minecraft.item.ToolMaterials;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -82,6 +86,14 @@ public class ExampleMod implements ModInitializer {
 					.build() // VERY IMPORTANT DONT DELETE FOR THE LOVE OF GOD PSLSSSSSS
 	);
 
+	public static final ToolItem LIGHTSABER_ITEM = new LightsaberItem(ToolMaterials.DIAMOND, 6, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));
+
+	public static final Identifier LIGHTSABER_HIT_SOUND_ID = new Identifier("lightsaber:lightsaber_hit");
+    public static SoundEvent LIGHTSABER_HIT_SOUND_EVENT = new SoundEvent(LIGHTSABER_HIT_SOUND_ID);
+
+	public static final Identifier LIGHTSABER_KILL_SOUND_ID = new Identifier("lightsaber:lightsaber_kill");
+    public static SoundEvent LIGHTSABER_KILL_SOUND_EVENT = new SoundEvent(LIGHTSABER_KILL_SOUND_ID);
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -90,6 +102,7 @@ public class ExampleMod implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		Registry.register(Registry.ITEM, new Identifier("grenade", "grenade_item"), GRENADE_ITEM);
+		Registry.register(Registry.ITEM, new Identifier("lightsaber", "lightsaber_item"), LIGHTSABER_ITEM);
 		Registry.register(Registry.BLOCK, new Identifier("nuke", "nuke_block"), NUKE_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("nuke", "nuke_item"),
 				new BlockItem(NUKE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
@@ -98,6 +111,10 @@ public class ExampleMod implements ModInitializer {
 		EntityRendererRegistry.register(NUKE_ENTITY_TYPE, (context) -> {
 			return new NukeRenderer(context);
 		});
+
+		Registry.register(Registry.SOUND_EVENT, LIGHTSABER_HIT_SOUND_ID, LIGHTSABER_HIT_SOUND_EVENT);
+		Registry.register(Registry.SOUND_EVENT, LIGHTSABER_KILL_SOUND_ID, LIGHTSABER_KILL_SOUND_EVENT);
+
 
 		// receiveEntityPacket();
 

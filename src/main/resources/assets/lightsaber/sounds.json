@@ -1,0 +1,21 @@
+{
+    "lightsaber_hit": {
+      "sounds": [
+        "lightsaber:sweep1",
+        "lightsaber:sweep2",
+        "lightsaber:sweep3",
+        "lightsaber:sweep4",
+        "lightsaber:sweep5",
+        "lightsaber:sweep6",
+        "lightsaber:sweep7"
+      ]
+    },
+    
+    "lightsaber_kill": {
+        "sounds": [
+          "lightsaber:crit1",
+          "lightsaber:crit2",
+          "lightsaber:crit3"
+        ]
+      }
+  }
