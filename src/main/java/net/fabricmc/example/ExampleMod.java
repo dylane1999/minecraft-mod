@@ -91,7 +91,7 @@ public class ExampleMod implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		Registry.register(Registry.ITEM, new Identifier("grenade", "grenade_item"), GRENADE_ITEM);
 		Registry.register(Registry.BLOCK, new Identifier("nuke", "nuke_block"), NUKE_BLOCK);
-		Registry.register(Registry.ITEM, new Identifier("nuke", "nuke_block"),
+		Registry.register(Registry.ITEM, new Identifier("nuke", "nuke_item"),
 				new BlockItem(NUKE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
 		EntityRendererRegistry.register(GRENADE_ENTITY_TYPE, (context) -> new FlyingItemEntityRenderer(context));
 
