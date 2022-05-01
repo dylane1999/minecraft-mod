@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " W ",
+      " W ",
+      "RRR"
+    ],
+    "key": {
+      "W": {
+        "item": "minecraft:beacon"
+      },
+      "R": {
+        "tag": "minecraft:logs"
+      }
+    },
+    "result": {
+      "item": "lightsaber:lightsaber_item",
+      "count": 1
+    }
+  }
